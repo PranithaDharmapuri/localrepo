@@ -3,8 +3,20 @@
         <h1>IN THE INDEX PAGE</h1>
     </div>
     <div>
-        click here to go to details PAGE
-        
-        <a href="{% url 'details' %}">details page</a>
+       {% if latest_question_list %}
+            <ul>
+                {% for question in latest_question_list %}
+                <li>
+                    <a href="{% url 'polls:details' question.id %}">{{ question.question_text }}</a>
+                </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+        <p>No polls are available</p>
+       {% endif %}
     </div>
 </P>
+<div>
+   <h3>Go to </h3> 
+   <li> <a href="{% url 'polls:details' question.id %}">{{ question.question_text }}</a></li>
+</div>

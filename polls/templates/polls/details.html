@@ -3,8 +3,17 @@
         <div>
             <h3>HEY YOU ARE IN DETAILS.HTML PAGE </h3>
             To go back to results.html page click here
-            <a href="{% url 'results' %}">results PAGE</a>
+            <a href="{% url 'polls:results' %}">results PAGE</a>
         </div>
-    </body>
+        <h1>{{ question.question_text }}</h1>
+        <ul>
+            {% for choice in question.choice_set.all %}
+            <li>
+                {{ choice.choice_text }}
+            </li>
+            {% endfor %}
+        </ul>
+        <h2>Go to </h2>
+        <a href="{% url 'polls:index' %}"> Index page</a>
     </body>
 </html>

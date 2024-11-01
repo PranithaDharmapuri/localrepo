@@ -1,5 +1,9 @@
 <div>
     <h1>Hey! This is Results.html page</h1>
     To go to index page click here
-    <a href="{% url 'index' %}">index PAGE</a>
+    <a href="{% url polls:'index' %}">index PAGE</a>
+    <h2>Go to </h2>
+    <a href="{% url 'polls:details' %}">
+        <button style="border-radius:7px;color:aqua;background-color:brown;height: 35px">Details page</button>
+    </a>
 </div>
