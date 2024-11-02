@@ -1,9 +1,9 @@
-<div>
-    <h1>Hey! This is Results.html page</h1>
-    To go to index page click here
-    <a href="{% url polls:'index' %}">index PAGE</a>
-    <h2>Go to </h2>
-    <a href="{% url 'polls:details' %}">
-        <button style="border-radius:7px;color:aqua;background-color:brown;height: 35px">Details page</button>
-    </a>
-</div>
+<h1>{{ question.question_text }}</h1>
+
+<ul>
+{% for choice in question.choice_set.all %}
+    <li>{{ choice.choice_text }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</li>
+{% endfor %}
+</ul>
+
+<a href="{% url 'polls:details' question.id %}">Vote again?</a>
