@@ -1,3 +1,7 @@
+<script src=
+"https://code.jquery.com/jquery-3.6.0.min.js">
+    </script>
+
 <form action="{% url 'polls:vote' question.id %}" method="post">
     {% csrf_token %}
     <fieldset>
@@ -9,4 +13,26 @@
         {% endfor %}
     </fieldset>
     <input type="submit" value="Vote">
+    <button type="button" onclick="delete_question()">delete this question</button>
+    <a href="{% url 'polls:index' %}"><button type="button">Home</button></a>
     </form>
+
+    <script>
+        function delete_question(){
+            alert("We are going to delete this quesion")
+
+            let formdata ={}
+            formdata['csrfmiddlewaretoken'] = "{{csrf_token}}"
+            
+
+            $.ajax({
+                url:"{% url 'polls:delete_question' question.id %}",
+                type:'POST',
+                data:formdata,
+                success:function(response){
+                    window.location = "{% url 'polls:index' %}"
+                }
+
+            })
+        }
+    </script>
