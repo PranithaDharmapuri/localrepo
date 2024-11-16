@@ -1,8 +1,10 @@
 from django.utils import timezone
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect,HttpResponse
 from django.db.models import F
 from django.urls import reverse
 from django.shortcuts import redirect, render, get_object_or_404
+
+from polls.forms import NameForm
 from .models import Question,Choice
 
 def index(request):
@@ -61,3 +63,19 @@ def add_question(request):
 def delete_question(request,question_id):
     question=Question.objects.filter(pk=question_id).delete()
     return redirect('polls:index')
+
+def get_name(request):
+    if request.method == 'POST':
+        form = NameForm(request.POST)
+        if form.is_valid():
+            return HttpResponseRedirect(reverse("polls:thanks"))
+    else:
+        form = NameForm()
+    
+    return render(request,"polls/name.html",{"form":form})
+
+def thanks(request):
+    return HttpResponse("<h3> Thanks for your Contribution.<h3>")
+
+# def login_page(request):
+#     if request.m
